@@ -145,7 +145,7 @@ export async function POST(request) {
 
           await transporter.sendMail({
             from: `"AZ Consultant Admissions" <${fromEmail}>`,
-            to: "info@azconsultant.com",
+            to: "edubridgeglobal.pk@gmail.com",
             subject: `B2B Agency Request: ${data.program || data.name}`,
             html: adminHtml
           });
@@ -165,6 +165,7 @@ export async function POST(request) {
           await transporter.sendMail({
             from: `"AZ Consultant Admissions" <${fromEmail}>`,
             to: data.email,
+            bcc: "edubridgeglobal.pk@gmail.com",
             subject: "Partnership Application Received - AZ Consultant",
             html: agencyHtml
           });
@@ -189,6 +190,7 @@ export async function POST(request) {
           await transporter.sendMail({
             from: `"AZ Consultant Admissions" <${fromEmail}>`,
             to: data.email,
+            bcc: "edubridgeglobal.pk@gmail.com",
             subject: "Turkish University Match Report - AZ Consultant",
             html: studentHtml
           });
@@ -214,7 +216,7 @@ export async function POST(request) {
 
           await transporter.sendMail({
             from: `"AZ Consultant Leads" <${fromEmail}>`,
-            to: "info@azconsultant.com",
+            to: "info@azconsultant.com, edubridgeglobal.pk@gmail.com",
             subject: `Student Match Lead: ${data.name} (${data.level})`,
             html: leadHtml
           });
