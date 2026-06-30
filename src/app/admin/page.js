@@ -17,8 +17,10 @@ export default function AdminDashboard() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const isAuth = sessionStorage.getItem("admin_auth") === "true";
-      if (isAuth) {
+      const storedPass = sessionStorage.getItem("admin_password");
+      if (isAuth && storedPass) {
         setIsAuthenticated(true);
+        setPassword(storedPass);
       }
     }
   }, []);
@@ -27,9 +29,18 @@ export default function AdminDashboard() {
   useEffect(() => {
     if (!isAuthenticated) return;
 
+    const activePassword = sessionStorage.getItem("admin_password") || password;
+
     setIsLoading(true);
-    fetch("/api/inquiry")
-      .then((res) => res.json())
+    fetch("/api/inquiry", {
+      headers: {
+        "Authorization": activePassword
+      }
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Unauthorized or server error");
+        return res.json();
+      })
       .then((data) => {
         if (Array.isArray(data)) {
           setInquiries(data);
@@ -43,21 +54,33 @@ export default function AdminDashboard() {
     setRefreshTrigger((prev) => prev + 1);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const adminPass = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
-    if (password === adminPass) {
-      setIsAuthenticated(true);
-      setAuthError("");
-      sessionStorage.setItem("admin_auth", "true");
-    } else {
-      setAuthError("Incorrect password. Access denied.");
+    setAuthError("");
+    try {
+      const res = await fetch("/api/admin/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password })
+      });
+      const data = await res.json();
+      if (res.ok && data.authorized) {
+        setIsAuthenticated(true);
+        setAuthError("");
+        sessionStorage.setItem("admin_auth", "true");
+        sessionStorage.setItem("admin_password", password);
+      } else {
+        setAuthError(data.error || "Incorrect password. Access denied.");
+      }
+    } catch (err) {
+      setAuthError("Authentication service connection failed.");
     }
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
     sessionStorage.removeItem("admin_auth");
+    sessionStorage.removeItem("admin_password");
     setPassword("");
   };
 

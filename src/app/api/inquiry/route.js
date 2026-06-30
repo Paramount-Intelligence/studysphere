@@ -54,15 +54,15 @@ function renderHtmlEmail({ title, intro, details, listHeader, listItems, footer 
             <div class="table-container">
               <table style="width: 100%; border-collapse: collapse;">
                 ${details.map((d, index) => {
-                  const isLast = index === details.length - 1;
-                  const borderStyle = isLast ? "" : "border-bottom: 1px solid rgba(255,255,255,0.05);";
-                  return `
+    const isLast = index === details.length - 1;
+    const borderStyle = isLast ? "" : "border-bottom: 1px solid rgba(255,255,255,0.05);";
+    return `
                     <tr>
                       <td style="padding: 10px 0; font-weight: 700; color: #34d399; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; width: 40%; vertical-align: middle; ${borderStyle}">${d.label}</td>
                       <td style="padding: 10px 0; color: #ffffff; font-size: 14px; font-weight: 500; text-align: right; vertical-align: middle; ${borderStyle}">${d.value}</td>
                     </tr>
                   `;
-                }).join('')}
+  }).join('')}
               </table>
             </div>
 
@@ -228,21 +228,28 @@ export async function POST(request) {
     return NextResponse.json({ success: true, inquiry: newInquiry });
   } catch (error) {
     console.error("Error saving inquiry", error);
-    return NextResponse.json({ 
-      error: "Server error occurred.", 
-      message: error.message, 
-      stack: error.stack 
+    return NextResponse.json({
+      error: "Server error occurred.",
+      message: error.message,
+      stack: error.stack
     }, { status: 500 });
   }
 }
 
-export async function GET() {
+export async function GET(request) {
   try {
+    const authHeader = request.headers.get("authorization");
+    const expectedPassword = process.env.ADMIN_PASSWORD;
+
+    if (authHeader !== expectedPassword) {
+      return NextResponse.json({ error: "Unauthorized access. Invalid credentials." }, { status: 401 });
+    }
+
     const sheetInquiries = await fetchSubmissionsFromSheet();
     return NextResponse.json(sheetInquiries);
   } catch (error) {
     console.error("Error reading inquiries from Google Sheets:", error);
-    return NextResponse.json({ 
+    return NextResponse.json({
       error: "Failed to read inquiries from Google Sheets.",
       message: error.message,
       stack: error.stack
