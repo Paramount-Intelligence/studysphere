@@ -1,0 +1,221 @@
+/* ================================================================
+   Admin Dashboard console style — AZ Consultant | Premium Edition
+   ================================================================ */
+
+.adminWrapper {
+  padding: 80px 0 100px 0;
+}
+
+.header {
+  margin-bottom: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.title {
+  font-size: 38px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff 30%, #a8f0f5 65%, var(--color-secondary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+/* Stats Overview Grid */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.statCard {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm), var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gradient-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-spring);
+}
+.statCard:hover::before {
+  transform: scaleX(1);
+}
+
+.statVal {
+  font-size: 32px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Controls Toolbar */
+.controlsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.searchBox {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  padding: 6px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.searchInput {
+  flex: 1;
+  font-size: 14px;
+  padding: 8px 10px;
+  color: #fff;
+  outline: none;
+}
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+/* Glass Table container */
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg), var(--shadow-card);
+}
+
+.adminTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.adminTable th, .adminTable td {
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.adminTable th {
+  background: rgba(4, 12, 22, 0.85);
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.adminTable tr:last-child td {
+  border-bottom: none;
+}
+
+.adminTable tr {
+  transition: background var(--t-fast);
+}
+
+.adminTable tr:hover td {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.studentName {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.studentEmail {
+  color: var(--text-secondary);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.detailsCol {
+  max-width: 380px;
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding: 6px 0;
+}
+
+.dateText {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 80px 24px;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 1200px) {
+  .statsRow {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .adminWrapper {
+    padding: 60px 0 80px 0;
+  }
+  .controlsRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .searchBox {
+    max-width: 100%;
+  }
+  .adminTable th, .adminTable td {
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .statsRow {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

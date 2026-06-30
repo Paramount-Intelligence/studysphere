@@ -1,0 +1,303 @@
+/* ================================================================
+   Program Finder Styles — AZ Consultant | Premium Edition
+   ================================================================ */
+
+.pageHeader {
+  padding: 110px 0 48px 0;
+  text-align: center;
+  position: relative;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff 30%, #a8f0f5 65%, var(--color-secondary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+.searchLayout {
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  gap: 40px;
+  padding-bottom: 100px;
+  align-items: start;
+}
+
+/* Sidebar styling */
+.sidebar {
+  padding: 32px 28px;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md), var(--shadow-card);
+}
+
+.filterSection {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 24px;
+}
+
+.filterSection:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.filterTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.clearFilterLink {
+  font-size: 11px;
+  color: var(--color-secondary-light);
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 500;
+  transition: color var(--t-fast);
+}
+
+.clearFilterLink:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Checkbox group */
+.checkboxGroup {
+  max-height: 240px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+.checkboxGroup::-webkit-scrollbar {
+  width: 4px;
+}
+.checkboxGroup::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+  transition: color var(--t-fast);
+}
+
+.checkboxInput {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background: rgba(2, 10, 18, 0.8);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--t-fast);
+}
+
+.checkboxInput:checked {
+  background: var(--gradient-brand-diag);
+  border-color: var(--color-secondary-light);
+}
+
+.checkboxInput:checked::after {
+  content: "✓";
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.checkboxLabel:hover .checkboxInput {
+  border-color: rgba(0, 175, 185, 0.5);
+  box-shadow: 0 0 8px rgba(0, 175, 185, 0.18);
+}
+
+.checkboxLabel:hover {
+  color: #ffffff;
+}
+
+/* Range slider styling */
+.priceRangeDisplay {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 12px;
+  align-items: center;
+}
+
+.priceRangeLabel {
+  font-weight: 700;
+  color: var(--color-secondary-light);
+  font-size: 14px;
+}
+
+.rangeSlider {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 99px;
+  outline: none;
+  cursor: pointer;
+  accent-color: var(--color-secondary);
+  -webkit-appearance: none;
+  margin-top: 12px;
+}
+.rangeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-secondary-light);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 6px rgba(0, 175, 185, 0.5);
+  margin-top: -6px;
+}
+
+/* Results Content */
+.resultsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.searchHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.resultsCount {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.resultsCount span {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.searchInputCard {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  align-items: center;
+  padding: 6px 14px;
+  border: 1px solid var(--border-color);
+}
+
+.searchInput {
+  flex: 1;
+  font-size: 14.5px;
+  padding: 6px 8px;
+  color: #fff;
+  outline: none;
+}
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+/* Program List Grid */
+.resultsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md), var(--shadow-card);
+}
+
+.emptyIcon {
+  font-size: 48px;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+.loadMoreWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .searchLayout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .sidebar {
+    position: static;
+    width: 100%;
+    padding: 28px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .resultsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .searchHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  
+  .searchInputCard {
+    max-width: 100%;
+  }
+  
+  .title {
+    font-size: 32px;
+  }
+  .pageHeader {
+    padding: 60px 0 32px 0;
+  }
+}

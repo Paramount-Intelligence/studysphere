@@ -1,0 +1,1208 @@
+/* ================================================================
+   page.module.css  — B2B Landing Page  (Premium Edition)
+================================================================ */
+
+/* ── Hero ─────────────────────────────────────────────────────── */
+.heroSection {
+  position: relative;
+  padding: 130px 0 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* animated mesh background inside hero */
+.heroSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 30%, rgba(14,93,117,0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 55% at 85% 70%, rgba(0,175,185,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50%  5%, rgba(28,229,242,0.10) 0%, transparent 50%);
+  animation: gradientShift 12s ease infinite;
+  background-size: 200% 200%;
+  z-index: 0;
+}
+
+/* shimmering horizontal line across hero */
+.heroSection::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,175,185,0.5), transparent);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.heroTagline {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-secondary-light);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  background: rgba(0,175,185,0.1);
+  padding: 7px 20px;
+  border-radius: 99px;
+  border: 1px solid rgba(0,175,185,0.25);
+  animation: fadeUp 0.5s var(--ease-spring) both;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.heroTagline::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--color-secondary);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--color-secondary);
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+.heroTitle {
+  font-size: 58px;
+  line-height: 1.12;
+  font-weight: 900;
+  background: linear-gradient(135deg, #fff 30%, #a8f0f5 65%, var(--color-secondary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeUp 0.6s 0.1s var(--ease-spring) both;
+  letter-spacing: -0.02em;
+}
+
+.heroDesc {
+  font-size: 17px;
+  color: var(--text-secondary);
+  max-width: 680px;
+  line-height: 1.75;
+  animation: fadeUp 0.65s 0.2s var(--ease-spring) both;
+}
+
+.heroActions {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  animation: fadeUp 0.65s 0.3s var(--ease-spring) both;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* floating badge row under CTA */
+.heroBadges {
+  display: flex;
+  gap: 20px;
+  margin-top: 16px;
+  animation: fadeUp 0.65s 0.4s var(--ease-spring) both;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.heroBadgeItem {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.heroBadgeCheck {
+  color: var(--color-secondary);
+  font-size: 15px;
+}
+
+/* ── Section base ─────────────────────────────────────────────── */
+.section {
+  padding: 110px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.sectionDivider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,175,185,0.2), transparent);
+}
+
+.darkSection {
+  background: rgba(5, 14, 22, 0.5);
+}
+
+/* ── Who We Are ──────────────────────────────────────────────── */
+.whoWeAreGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.whoText {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.whoSectionLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  background: rgba(0,175,185,0.08);
+  border: 1px solid rgba(0,175,185,0.2);
+  border-radius: 99px;
+  padding: 5px 14px;
+  width: fit-content;
+}
+
+.whoTitle {
+  font-size: 40px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.whoTitle span {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.whoDesc {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.whoCards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.whoCard {
+  padding: 28px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* animated top-border on who card */
+.whoCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gradient-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-spring);
+}
+.whoCard:hover::before { transform: scaleX(1); }
+
+.whoCardVal {
+  font-size: 36px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #fff, var(--color-secondary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.whoCardLabel {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ── Countries Section ───────────────────────────────────────── */
+.countryCard {
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.countryCard::before {
+  content: '';
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  width: 270px;
+  height: 200px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 480'%3E%3Cg fill-rule='evenodd'%3E%3Cpath fill='%23e30a17' d='M0 0h640v480H0z'/%3E%3Cpath fill='%23fff' d='M407 247.5c0 66.2-54.6 119.9-122 119.9s-122-53.7-122-120 54.6-119.8 122-119.8 122 53.7 122 119.9'/%3E%3Cpath fill='%23e30a17' d='M413 247.5c0 53-43.6 95.9-97.5 95.9s-97.6-43-97.6-96 43.7-95.8 97.6-95.8 97.6 42.9 97.6 95.9z'/%3E%3Cpath fill='%23fff' d='m430.7 191.5-1 44.3-41.3 11.2 40.8 14.5-1 40.7 26.5-31.8 40.2 14-23.2-34.1 28.3-33.9-43.5 12-25.8-37z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.04;
+  pointer-events: none;
+  user-select: none;
+}
+
+.countryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.countryHeaderText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.countryName {
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.countrySubtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.countryFlag {
+  font-size: 48px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+  flex-shrink: 0;
+}
+
+.countryStats {
+  display: flex;
+  gap: 24px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.countryStat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.countryStatVal {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-secondary-light);
+}
+
+.countryStatLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.countryBenefitsList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  list-style: none;
+}
+
+.countryBenefitItem {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  padding: 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: background var(--t-fast), border-color var(--t-fast);
+}
+.countryBenefitItem:hover {
+  background: rgba(0,175,185,0.05);
+  border-color: var(--border-glow-soft);
+}
+
+.countryBenefitCheck {
+  color: var(--color-secondary-light);
+  font-size: 17px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.countryBenefitTitle {
+  font-weight: 700;
+  color: #fff;
+  display: block;
+  margin-bottom: 3px;
+}
+
+/* ── Partner Universities ─────────────────────────────────────── */
+.uniGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.uniCard {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+
+/* glowing number badge top-right */
+.uniIndexBadge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0,175,185,0.12);
+  border: 1px solid rgba(0,175,185,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-secondary-light);
+}
+
+.uniIconCircle {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--gradient-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0,175,185,0.3);
+  transition: transform var(--t-normal), box-shadow var(--t-normal);
+}
+.uniCard:hover .uniIconCircle {
+  transform: scale(1.1) rotate(-4deg);
+  box-shadow: 0 6px 22px rgba(0,175,185,0.5);
+}
+
+.uniTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.35;
+  padding-right: 36px; /* avoid overlap with badge */
+}
+
+.uniMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.uniLoc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.uniStatRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.uniStat {
+  font-size: 13px;
+  color: var(--color-secondary-light);
+  font-weight: 700;
+}
+
+/* ── Services Section ────────────────────────────────────────── */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.serviceCard {
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* bottom gradient sweep on hover */
+.serviceCard::after {
+  content: '';
+  position: absolute;
+  bottom: -100%;
+  left: 0; right: 0;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,175,185,0.07), transparent);
+  transition: bottom 0.4s var(--ease-smooth);
+}
+.serviceCard:hover::after { bottom: 0; }
+
+.serviceIconWrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(0,175,185,0.1);
+  border: 1px solid rgba(0,175,185,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: background var(--t-normal), transform var(--t-normal), box-shadow var(--t-normal);
+  position: relative;
+  z-index: 1;
+}
+.serviceCard:hover .serviceIconWrap {
+  background: rgba(0,175,185,0.2);
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 8px 24px rgba(0,175,185,0.35);
+}
+
+.serviceTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.serviceDesc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+.serviceArrow {
+  margin-top: auto;
+  font-size: 13px;
+  color: var(--color-secondary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap var(--t-fast);
+  position: relative;
+  z-index: 1;
+}
+.serviceCard:hover .serviceArrow { gap: 10px; }
+
+/* ── Partner Form Section ─────────────────────────────────────── */
+.formSection {
+  position: relative;
+}
+
+/* glowing top border */
+.formSection::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 400px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+}
+
+.formLayoutGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.formInfoSide {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.formInfoTitle {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.formInfoTitle span {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.formInfoDesc {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.benefitsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+}
+
+.benefitItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: background var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
+}
+.benefitItem:hover {
+  background: rgba(0,175,185,0.05);
+  border-color: var(--border-glow-soft);
+  transform: translateX(4px);
+}
+
+.benefitCheck {
+  color: var(--color-secondary-light);
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Form card ──────────────────────────────────────────────── */
+.formCard {
+  padding: 44px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* animated rotating glow ring behind form card */
+.formCard::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 600px; height: 600px;
+  margin-top: -300px; margin-left: -300px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(0,175,185,0.15) 60deg,
+    transparent 120deg
+  );
+  animation: rotateBorder 8s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.formCard > * { position: relative; z-index: 1; }
+
+.formTitle {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 28px;
+  background: linear-gradient(135deg, #fff 40%, var(--color-secondary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.submitBtn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 15px;
+  font-size: 16px;
+  letter-spacing: 0.03em;
+}
+
+/* ── Form success state ─────────────────────────────────────── */
+.formSuccess {
+  text-align: center;
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  animation: scaleIn 0.5s var(--ease-spring) both;
+}
+
+.successIconRing {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: rgba(16,185,129,0.1);
+  border: 2px solid rgba(16,185,129,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  color: var(--color-success);
+  box-shadow: 0 0 30px rgba(16,185,129,0.2);
+  animation: float 3s ease-in-out infinite;
+}
+
+.successTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.successDesc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 380px;
+  line-height: 1.6;
+}
+
+.heroBtn {
+  font-size: 16px;
+  padding: 14px 32px;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .heroTitle          { font-size: 44px; }
+  .whoWeAreGrid       { grid-template-columns: 1fr; gap: 50px; }
+  .uniGrid            { grid-template-columns: repeat(2, 1fr); }
+  .servicesGrid       { grid-template-columns: repeat(2, 1fr); }
+  .countryBenefitsList{ grid-template-columns: 1fr; }
+  .formLayoutGrid     { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 768px) {
+  .heroTitle    { font-size: 34px; }
+  .heroDesc     { font-size: 15px; max-width: 100%; }
+  .heroSection  { padding: 90px 0 70px; }
+  .uniGrid      { grid-template-columns: 1fr; }
+  .servicesGrid { grid-template-columns: 1fr; }
+  .whoCard      { padding: 20px 16px; }
+  .formCard     { padding: 28px 22px; }
+  .countryCard  { padding: 28px 22px; }
+  .section      { padding: 70px 0; }
+  .formInfoTitle{ font-size: 28px; }
+  .whoTitle     { font-size: 30px; }
+}
+
+@media (max-width: 600px) {
+  .countryStats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px 10px;
+  }
+  .countryStat {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle    { font-size: 28px; }
+  .whoTitle     { font-size: 24px; }
+  .formInfoTitle{ font-size: 24px; }
+  .whoCards     { grid-template-columns: 1fr; }
+  .heroActions  {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    padding: 0 10px;
+    gap: 12px;
+  }
+  .heroBtn      {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    padding: 12px 24px;
+  }
+}
+
+/* ── Interactive University Modal ───────────────────────────────── */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 7, 13, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modalContainer {
+  width: 100%;
+  max-width: 1200px;
+  height: 85vh;
+  max-height: 800px;
+  display: flex;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 175, 185, 0.2);
+  background: rgba(6, 15, 27, 0.95);
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modalLeftPane {
+  flex: 0 0 350px;
+  background: rgba(4, 9, 17, 0.6);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modalRightPane {
+  flex: 1;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  background: radial-gradient(circle at top right, rgba(0, 175, 185, 0.03) 0%, transparent 60%);
+}
+
+.modalUniHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.modalUniIconCircle {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(0, 175, 185, 0.1);
+  border: 1px solid rgba(0, 175, 185, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 0 16px rgba(0, 175, 185, 0.15);
+}
+
+.modalUniTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.25;
+}
+
+.modalUniLoc {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 4px;
+}
+
+.modalUniDesc {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.modalStatsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modalStatItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modalStatLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.modalStatValue {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.modalLevelsBox {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+}
+
+.modalLevelPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.modalCatalogHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.modalCatalogTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.modalCatalogSubtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 4px;
+}
+
+.modalCloseBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.6);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+
+.modalCloseBtn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  transform: rotate(90deg);
+}
+
+.modalToolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.modalSearchBox {
+  position: relative;
+  width: 100%;
+}
+
+.modalSearchIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  font-size: 14px;
+}
+
+.modalSearchInput {
+  width: 100%;
+  padding: 11px 40px 11px 40px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 175, 185, 0.15);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: all var(--t-fast);
+}
+
+.modalSearchInput:focus {
+  background: rgba(0, 175, 185, 0.04);
+  border-color: var(--color-secondary-light);
+  box-shadow: 0 0 12px rgba(0, 175, 185, 0.2);
+}
+
+.modalClearBtn {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 12px;
+}
+.modalClearBtn:hover {
+  color: #fff;
+}
+
+.modalLevelFilter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.modalFilterTab {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+
+.modalFilterTab:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.modalFilterTabActive {
+  background: rgba(0, 175, 185, 0.12) !important;
+  border-color: var(--color-secondary) !important;
+  color: var(--color-secondary-light) !important;
+}
+
+.modalCourseListScroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 175, 185, 0.2) transparent;
+}
+
+.modalCourseListScroll::-webkit-scrollbar {
+  width: 5px;
+}
+.modalCourseListScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.modalCourseListScroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 175, 185, 0.2);
+  border-radius: 3px;
+}
+
+.modalCourseGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  align-content: start;
+}
+
+.modalCourseCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all 0.2s ease;
+}
+
+.modalCourseCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(0, 175, 185, 0.2);
+  transform: translateY(-2px);
+}
+
+.modalCourseHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modalCourseName {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.modalCourseFaculty {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.modalCourseMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.modalCourseFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding-top: 12px;
+}
+
+.modalCoursePricing {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalCourseOriginalFee {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.modalCourseActualFee {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-secondary-light);
+}
+
+.modalCourseFeePeriod {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-left: 1px;
+}
+
+.modalCourseApplyBtn {
+  padding: 6px 14px !important;
+  font-size: 11px !important;
+  border-radius: 6px !important;
+}
+
+.modalNoResults {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.modalNoResultsIcon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.modalLoadMoreContainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+/* ── Modal Animations ───────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ── Responsive CSS for Modal ───────────────────────────────────── */
+@media (max-width: 992px) {
+  .modalContainer {
+    flex-direction: column;
+    height: 90vh;
+    max-height: 900px;
+  }
+  .modalLeftPane {
+    flex: 0 0 auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 24px;
+    gap: 16px;
+  }
+  .modalRightPane {
+    padding: 24px;
+  }
+  .modalStatsList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 24px;
+  }
+  .modalUniDesc, .modalLevelsBox {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .modalBackdrop {
+    padding: 10px;
+  }
+  .modalContainer {
+    height: 95vh;
+  }
+  .modalLeftPane {
+    padding: 20px;
+  }
+  .modalRightPane {
+    padding: 20px 16px;
+  }
+  .modalCatalogTitle {
+    font-size: 20px;
+  }
+  .modalToolbar {
+    gap: 10px;
+  }
+  .modalCourseGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .modalStatsList {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .modalStatItem {
+    padding-bottom: 6px;
+  }
+}

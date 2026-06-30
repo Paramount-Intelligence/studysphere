@@ -1,0 +1,202 @@
+/* ================================================================
+   Footer Style — AZ Consultant | Premium Edition
+   ================================================================ */
+
+.footerWrapper {
+  background: linear-gradient(180deg, rgba(2, 11, 19, 0) 0%, #01060a 80px);
+  position: relative;
+  padding: 80px 0 40px;
+  margin-top: auto;
+  overflow: hidden;
+}
+
+/* top separator line */
+.footerWrapper::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(14, 93, 117, 0.4) 20%,
+    rgba(0, 175, 185, 0.6) 50%,
+    rgba(28, 229, 242, 0.4) 80%,
+    transparent 100%);
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.2fr 1.5fr;
+  gap: 48px;
+  margin-bottom: 56px;
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1.05);
+}
+
+.brandDesc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 320px;
+}
+
+.socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.socialIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: all var(--t-normal) var(--ease-spring);
+  cursor: pointer;
+}
+.socialIcon:hover {
+  background: var(--gradient-brand-diag);
+  border-color: var(--color-secondary-light);
+  color: #fff;
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: var(--shadow-glow), 0 8px 24px rgba(0, 175, 185, 0.35);
+}
+
+.columnTitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 24px;
+  position: relative;
+  padding-bottom: 10px;
+}
+.columnTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 24px; height: 2px;
+  background: var(--gradient-brand);
+  border-radius: 2px;
+}
+
+.linksList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+}
+
+.footerLink {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  transition: color var(--t-fast), transform var(--t-fast);
+  display: inline-block;
+}
+.footerLink:hover {
+  color: var(--color-secondary-light);
+  transform: translateX(4px);
+}
+
+.contactItem {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+.contactIcon {
+  color: var(--color-secondary);
+  flex-shrink: 0;
+  font-size: 16px;
+  margin-top: 1px;
+}
+
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contactDetails span {
+  transition: color var(--t-fast);
+}
+.contactDetails span:hover {
+  color: #fff;
+}
+
+.bottomBar {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.copyText {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.disclaimerText {
+  font-size: 11px;
+  color: var(--text-muted);
+  max-width: 600px;
+  text-align: right;
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .brandDesc {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerWrapper {
+    padding: 60px 0 30px;
+  }
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .bottomBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .disclaimerText {
+    text-align: left;
+    max-width: 100%;
+  }
+}
