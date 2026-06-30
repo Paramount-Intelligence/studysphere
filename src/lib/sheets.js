@@ -109,3 +109,54 @@ export async function appendSubmissionToSheet(data) {
     return false;
   }
 }
+
+// Fetch inquiry submissions dynamically from the Google Sheet Submissions tab
+export async function fetchSubmissionsFromSheet() {
+  const auth = getAuthToken();
+  const sheetId = process.env.GOOGLE_SHEET_ID;
+
+  if (!auth || !sheetId) {
+    throw new Error("Google Sheets environment credentials are not configured.");
+  }
+
+  try {
+    const sheets = google.sheets({ version: "v4", auth });
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: sheetId,
+      range: "Submissions!A:I"
+    });
+
+    const rows = response.data.values;
+    if (!rows || rows.length <= 1) {
+      return [];
+    }
+
+    // Parse headers: id | date | type | name | email | phone | university | program | details
+    const headers = rows[0].map(h => h.trim().toLowerCase());
+    const dataRows = rows.slice(1);
+
+    // Map to matching objects and reverse to show newest first
+    return dataRows.map((row) => {
+      const submission = {};
+      headers.forEach((header, index) => {
+        submission[header] = row[index] !== undefined ? row[index].trim() : "";
+      });
+      
+      // Ensure fields match what admin/page.js expects:
+      return {
+        id: submission.id,
+        date: submission.date,
+        level: submission.type === "B2B Partner Application" ? "B2B Partner Request" : "Student Assessment",
+        name: submission.name,
+        email: submission.email,
+        phone: submission.phone,
+        university: submission.university || "Any",
+        program: submission.program || "N/A",
+        message: submission.details || ""
+      };
+    }).reverse();
+  } catch (error) {
+    console.error("Error reading submissions from Google Sheets:", error);
+    throw error;
+  }
+}

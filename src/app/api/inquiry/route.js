@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import nodemailer from "nodemailer";
-import { appendSubmissionToSheet } from "@/lib/sheets";
+import { appendSubmissionToSheet, fetchSubmissionsFromSheet } from "@/lib/sheets";
 
 // Configure SMTP Transporter using environment variables
 function createTransporter() {
@@ -105,36 +105,20 @@ export async function POST(request) {
       return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
     }
 
-    const dataDir = path.join(process.cwd(), "src", "data");
-    const filePath = path.join(dataDir, "inquiries.json");
-
-    // Ensure directory exists
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
-    }
-
-    let inquiries = [];
-    if (fs.existsSync(filePath)) {
-      try {
-        const fileContent = fs.readFileSync(filePath, "utf8");
-        inquiries = JSON.parse(fileContent);
-      } catch (err) {
-        console.error("Error parsing inquiries.json", err);
-      }
-    }
-
     const newInquiry = {
       id: Date.now().toString(),
       ...data
     };
 
-    inquiries.unshift(newInquiry);
-    fs.writeFileSync(filePath, JSON.stringify(inquiries, null, 2), "utf8");
-
-    // Save to Google Sheet asynchronously
-    appendSubmissionToSheet(newInquiry).catch((sheetErr) => {
-      console.error("Async Google Sheets submission write error:", sheetErr);
-    });
+    // Save to Google Sheet
+    try {
+      const sheetLogged = await appendSubmissionToSheet(newInquiry);
+      if (!sheetLogged) {
+        console.error("Google Sheets append returned false (verify sheet ID, credentials, and 'Submissions' tab exist)");
+      }
+    } catch (sheetErr) {
+      console.error("Google Sheets submission write error:", sheetErr.message);
+    }
 
     // Attempt SMTP Email sending asynchronously
     try {
@@ -244,21 +228,24 @@ export async function POST(request) {
     return NextResponse.json({ success: true, inquiry: newInquiry });
   } catch (error) {
     console.error("Error saving inquiry", error);
-    return NextResponse.json({ error: "Server error occurred." }, { status: 500 });
+    return NextResponse.json({ 
+      error: "Server error occurred.", 
+      message: error.message, 
+      stack: error.stack 
+    }, { status: 500 });
   }
 }
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), "src", "data", "inquiries.json");
-    let inquiries = [];
-    if (fs.existsSync(filePath)) {
-      const fileContent = fs.readFileSync(filePath, "utf8");
-      inquiries = JSON.parse(fileContent);
-    }
-    return NextResponse.json(inquiries);
+    const sheetInquiries = await fetchSubmissionsFromSheet();
+    return NextResponse.json(sheetInquiries);
   } catch (error) {
-    console.error("Error reading inquiries", error);
-    return NextResponse.json({ error: "Failed to read inquiries." }, { status: 500 });
+    console.error("Error reading inquiries from Google Sheets:", error);
+    return NextResponse.json({ 
+      error: "Failed to read inquiries from Google Sheets.",
+      message: error.message,
+      stack: error.stack
+    }, { status: 500 });
   }
 }

@@ -83,15 +83,7 @@ export default function Navbar() {
             </li>
           ))}
 
-          <li>
-            <Link
-              href="/admin"
-              className={`${styles.navLink} ${pathname === "/admin" ? styles.activeNavLink : ""}`}
-              onClick={closeMenu}
-            >
-              Dashboard
-            </Link>
-          </li>
+
         </ul>
 
         {/* Desktop CTA */}
@@ -141,15 +133,7 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
-          <li>
-            <Link
-              href="/admin"
-              className={`${styles.mobileNavLink} ${pathname === "/admin" ? styles.mobileActiveNavLink : ""}`}
-              onClick={closeMenu}
-            >
-              Dashboard
-            </Link>
-          </li>
+
           <li className={styles.mobileCta}>
             <Link
               href={isHome ? "#become-a-partner" : "/#become-a-partner"}

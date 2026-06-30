@@ -219,3 +219,92 @@
     gap: 16px;
   }
 }
+
+/* ── Staff Access Login Portal ───────────────────────────────────── */
+.loginOverlay {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 32px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: rgba(4, 12, 22, 0.75);
+  box-shadow: var(--shadow-lg), var(--shadow-card);
+  text-align: center;
+}
+
+.loginHeader {
+  margin-bottom: 32px;
+}
+
+.loginIcon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.loginTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #ffffff 40%, #1ce5f2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.loginSubtitle {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.loginInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.loginInput {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: all var(--t-fast);
+}
+
+.loginInput:focus {
+  border-color: var(--color-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 3px rgba(0, 175, 185, 0.25);
+}
+
+.loginError {
+  font-size: 13px;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  text-align: left;
+  line-height: 1.4;
+}
+

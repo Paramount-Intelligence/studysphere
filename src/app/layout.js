@@ -19,6 +19,11 @@ export const metadata = {
   title: "AZ Consultant — Study in Turkey | Find 1,950+ University Courses & Apply for Free",
   description: "Explore 1,950+ undergraduate, graduate, and associate programs across 17 top Turkish universities. Compare tuition fees, access scholarship waivers, and get free visa support.",
   keywords: "study in Turkey, Turkish universities, study abroad, free university application, course comparison, scholarships in Turkey, AZ Consultant",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }) {

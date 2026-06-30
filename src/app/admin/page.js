@@ -9,8 +9,24 @@ export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
-  // Fetch inquiries from server endpoint
+  const [password, setPassword] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authError, setAuthError] = useState("");
+
+  // Check sessionStorage on mount to keep authenticated session
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isAuth = sessionStorage.getItem("admin_auth") === "true";
+      if (isAuth) {
+        setIsAuthenticated(true);
+      }
+    }
+  }, []);
+
+  // Fetch inquiries from server endpoint (only if authenticated)
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
     setIsLoading(true);
     fetch("/api/inquiry")
       .then((res) => res.json())
@@ -21,10 +37,28 @@ export default function AdminDashboard() {
       })
       .catch((err) => console.error("Error loading B2B inquiries", err))
       .finally(() => setIsLoading(false));
-  }, [refreshTrigger]);
+  }, [refreshTrigger, isAuthenticated]);
 
   const handleRefresh = () => {
     setRefreshTrigger((prev) => prev + 1);
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const adminPass = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
+    if (password === adminPass) {
+      setIsAuthenticated(true);
+      setAuthError("");
+      sessionStorage.setItem("admin_auth", "true");
+    } else {
+      setAuthError("Incorrect password. Access denied.");
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    sessionStorage.removeItem("admin_auth");
+    setPassword("");
   };
 
   // Filter B2B applications by search criteria
@@ -45,7 +79,7 @@ export default function AdminDashboard() {
   // Statistics computations
   const stats = useMemo(() => {
     const total = inquiries.length;
-    
+
     // Count created today
     const startOfToday = new Date();
     startOfToday.setHours(0, 0, 0, 0);
@@ -73,109 +107,155 @@ export default function AdminDashboard() {
     });
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className="container animate-fade">
+        <div className={styles.loginOverlay}>
+          <div className={`${styles.loginCard} glass`}>
+            <div className={styles.loginHeader}>
+              <span className={styles.loginIcon}>🔒</span>
+              <h1 className={styles.loginTitle}>AZ Consultant Access</h1>
+              <p className={styles.loginSubtitle}>Please enter password to view submissions.</p>
+            </div>
+
+            <form onSubmit={handleLogin} className={styles.loginForm}>
+              <div className={styles.loginInputGroup}>
+                <label htmlFor="password" className="form-label">Password</label>
+                <input
+                  id="password"
+                  type="password"
+                  required
+                  placeholder="••••••••"
+                  className={styles.loginInput}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+
+              {authError && (
+                <div className={styles.loginError}>
+                  ⚠️ {authError}
+                </div>
+              )}
+
+              <button type="submit" className="btn btn-primary" style={{ width: "100%", justifyContent: "center" }}>
+                Authenticate ✦
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container animate-fade">
       <div className={styles.adminWrapper}>
         <header className={styles.header}>
-        <div>
-          <h1 className={styles.title}>Partner Management Console</h1>
-          <p style={{ color: "var(--text-secondary)", fontSize: "14px" }}>
-            Review agency applications and sub-agent partnership requests.
-          </p>
-        </div>
-        <button onClick={handleRefresh} className="btn btn-secondary btn-sm">
-          🔄 Refresh List
-        </button>
-      </header>
-
-      {/* Stats Cards Row */}
-      <div className={styles.statsRow}>
-        <div className={`${styles.statCard} glass`}>
-          <span className={styles.statVal}>{stats.total}</span>
-          <span className={styles.statLabel}>Partner Applications</span>
-        </div>
-        <div className={`${styles.statCard} glass`}>
-          <span className={styles.statVal} style={{ color: "var(--color-secondary-light)" }}>
-            {stats.today}
-          </span>
-          <span className={styles.statLabel}>New Submissions Today</span>
-        </div>
-        <div className={`${styles.statCard} glass`}>
-          <span className={styles.statVal}>{stats.highVolume}</span>
-          <span className={styles.statLabel}>High Volume Agencies (50+)</span>
-        </div>
-        <div className={`${styles.statCard} glass`}>
-          <span className={styles.statVal}>{stats.lowVolume}</span>
-          <span className={styles.statLabel}>Standard Agencies (1-50)</span>
-        </div>
-      </div>
-
-      {/* Filter Toolbar */}
-      <div className={styles.controlsRow}>
-        <div className={`${styles.searchBox} glass`}>
-          <span style={{ color: "var(--text-muted)", marginRight: "8px" }}>🔍</span>
-          <input
-            type="text"
-            placeholder="Search B2B applications by agency name, location, contact..."
-            className={styles.searchInput}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-        <div style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
-          Showing <span>{filteredInquiries.length}</span> of {inquiries.length} requests
-        </div>
-      </div>
-
-      {/* Inquiries Table */}
-      <div className={`${styles.tableContainer} glass`}>
-        {isLoading ? (
-          <div style={{ textAlign: "center", padding: "60px 0" }}>
-            <h3>Loading submissions...</h3>
+          <div>
+            <h1 className={styles.title}>Partner Management Console</h1>
+            <p style={{ color: "var(--text-secondary)", fontSize: "14px" }}>
+              Review agency applications and sub-agent partnership requests.
+            </p>
           </div>
-        ) : filteredInquiries.length > 0 ? (
-          <table className={styles.adminTable}>
-            <thead>
-              <tr>
-                <th>Agency & Contact</th>
-                <th>Director / Rep</th>
-                <th>Registration Details</th>
-                <th>Submitted Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredInquiries.map((item) => (
-                <tr key={item.id}>
-                  <td>
-                    <div className={styles.studentName}>{item.program}</div> {/* Agency Name */}
-                    <div className={styles.studentEmail} style={{ color: "var(--color-secondary-light)" }}>
-                      ✉ {item.email}
-                    </div>
-                    <div className={styles.studentEmail}>
-                      📞 {item.phone}
-                    </div>
-                  </td>
-                  <td>
-                    <div style={{ color: "#ffffff", fontWeight: "600" }}>{item.name}</div>
-                    <span className="badge badge-teal" style={{ marginTop: "4px" }}>Director</span>
-                  </td>
-                  <td>
-                    <div className={styles.detailsCol}>{item.message}</div>
-                  </td>
-                  <td>
-                    <div className={styles.dateText}>{formatDate(item.date)}</div>
-                  </td>
+          <div style={{ display: "flex", gap: "10px" }}>
+            <button onClick={handleRefresh} className="btn btn-secondary btn-sm">
+              🔄 Refresh List
+            </button>
+            <button onClick={handleLogout} className="btn btn-secondary btn-sm" style={{ borderColor: "rgba(239, 68, 68, 0.3)", color: "#ef4444" }}>
+              🚪 Logout
+            </button>
+          </div>
+        </header>
+
+        {/* Stats Cards Row */}
+        <div className={styles.statsRow}>
+          <div className={`${styles.statCard} glass`}>
+            <span className={styles.statVal}>{stats.total}</span>
+            <span className={styles.statLabel}>Partner Applications</span>
+          </div>
+          <div className={`${styles.statCard} glass`}>
+            <span className={styles.statVal} style={{ color: "var(--color-secondary-light)" }}>
+              {stats.today}
+            </span>
+            <span className={styles.statLabel}>New Submissions Today</span>
+          </div>
+          <div className={`${styles.statCard} glass`}>
+            <span className={styles.statVal}>{stats.highVolume}</span>
+            <span className={styles.statLabel}>High Volume Agencies (50+)</span>
+          </div>
+          <div className={`${styles.statCard} glass`}>
+            <span className={styles.statVal}>{stats.lowVolume}</span>
+            <span className={styles.statLabel}>Standard Agencies (1-50)</span>
+          </div>
+        </div>
+
+        {/* Filter Toolbar */}
+        <div className={styles.controlsRow}>
+          <div className={`${styles.searchBox} glass`}>
+            <span style={{ color: "var(--text-muted)", marginRight: "8px" }}>🔍</span>
+            <input
+              type="text"
+              placeholder="Search B2B applications by agency name, location, contact..."
+              className={styles.searchInput}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          <div style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
+            Showing <span>{filteredInquiries.length}</span> of {inquiries.length} requests
+          </div>
+        </div>
+
+        {/* Inquiries Table */}
+        <div className={`${styles.tableContainer} glass`}>
+          {isLoading ? (
+            <div style={{ textAlign: "center", padding: "60px 0" }}>
+              <h3>Loading submissions...</h3>
+            </div>
+          ) : filteredInquiries.length > 0 ? (
+            <table className={styles.adminTable}>
+              <thead>
+                <tr>
+                  <th>Agency & Contact</th>
+                  <th>Director / Rep</th>
+                  <th>Registration Details</th>
+                  <th>Submitted Date</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <div className={styles.emptyState}>
-            <h3>No B2B partner applications found</h3>
-            <p>Submissions from the 'Become a Partner' form will be displayed here.</p>
-          </div>
-        )}
-      </div>
+              </thead>
+              <tbody>
+                {filteredInquiries.map((item) => (
+                  <tr key={item.id}>
+                    <td>
+                      <div className={styles.studentName}>{item.program}</div> {/* Agency Name */}
+                      <div className={styles.studentEmail} style={{ color: "var(--color-secondary-light)" }}>
+                        ✉ {item.email}
+                      </div>
+                      <div className={styles.studentEmail}>
+                        📞 {item.phone}
+                      </div>
+                    </td>
+                    <td>
+                      <div style={{ color: "#ffffff", fontWeight: "600" }}>{item.name}</div>
+                      <span className="badge badge-teal" style={{ marginTop: "4px" }}>Director</span>
+                    </td>
+                    <td>
+                      <div className={styles.detailsCol}>{item.message}</div>
+                    </td>
+                    <td>
+                      <div className={styles.dateText}>{formatDate(item.date)}</div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div className={styles.emptyState}>
+              <h3>No B2B partner applications found</h3>
+              <p>Submissions from the 'Become a Partner' form will be displayed here.</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
